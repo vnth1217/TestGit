@@ -1,0 +1,23 @@
+
+Class Puppy{
+
+puppy(String n){
+  
+ name =n
+ 
+}
+ String getName(){
+  return n;
+}
+
+String doBark(){
+  return 'offo'; 
+ 
+}
+
+Boolean hasCurlyTail(){
+
+ return true;
+}
+
+}
