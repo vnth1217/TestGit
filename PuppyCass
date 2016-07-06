@@ -3,7 +3,8 @@ Class Puppy{
 
 puppy(String n){
   
- name =n
+ name =n;
+git;
  
 }
  String getName(){
