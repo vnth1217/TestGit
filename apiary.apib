@@ -22,7 +22,7 @@ A simple API offered by ConnectedHomes Customer Systems
 
 ## /homecare/contracts/v1/id/{id}
 
-Get the Contracts Details based on the unique id
+Get the Contracts Details based on the contract id
 
 + Parameters
     + id (required, string, `OD123`) ... Alphanumeric `id` of the Contract
@@ -107,8 +107,8 @@ The following table lists some possible outcomes that may occur as a result of t
 | Http Status Code |              Description             | Scenario | Resolution |
 |:----------------:|:------------------------------------:|:--------:|:----------:|
 |              200 | Contract Created                   |          |            |
+|              400 | Bad Request | Processing error | Refer to error message in response |
 |              403 | The Request was legal | Processing error | Refer to error message in response |
-|              404 | Exception happened during the request | Processing error |Refer to error message in response
 |              415 | Unsupported Media Type| Processing error | Refer to error message in response |
 
 + Request (application/json)
@@ -167,7 +167,15 @@ The following table lists some possible outcomes that may occur as a result of t
                "email":"test@gmail.er"
             }  
             
+
++ Response 400 (application/json)
+    Returned if there was an expection while processing the request body
+    + Body
     
+            {
+                "message": "Exception",
+                "errorMessage": "Provided {TEXT} is not valid"
+            }        
 
 + Response 403 (application/json)
     Returned if there was an exception while processing the request.
@@ -175,14 +183,6 @@ The following table lists some possible outcomes that may occur as a result of t
     
             { "message": "Forbidden"}
 
-+ Response 404 (application/json)
-    Returned if there was an expection while processing the request body
-    + Body
-    
-            {
-                "message": "Exception",
-                "errorMessage": "Provided {TEXT} is not valid"
-            }
 
 + Response 415 (application/json)
     Returned if there was an exception while processing the request.
@@ -197,7 +197,7 @@ The following table lists some possible outcomes that may occur as a result of t
 
 ## /homecare/contracts/?email={email}&mobileno={mobileno}
 
-Get the Contracts Details based on the unquie id
+Get the Contracts Details based on email and mobile number
 
 + Parameters
      + email (optional , string ,`test@ymail.com`) ...  Passing the emailId.
@@ -209,7 +209,7 @@ The following table lists some possible outcomes that may occur as a result of t
 | Http Status Code |              Description             | Scenario | Resolution |
 |:----------------:|:------------------------------------:|:--------:|:----------:|
 |              200 | Contract returned                        |          |            |
-|              403 | The Request was leagal | Processing error | Refer to error message in response |
+|              403 | The Request was legal | Processing error | Refer to error message in response |
 |              404 | Contract not found
 |              415 | Unsupported Media Type| Processing error | Refer to error message in response |
 
