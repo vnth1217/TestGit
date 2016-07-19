@@ -1,0 +1,243 @@
+FORMAT: 1A
+HOST: https://cs-api.bgchtest.info
+
+# Customer Systems API
+
+A simple API offered by ConnectedHomes Customer Systems
+
+
+##Allowed HTTPs requests
+
+- `GET` Retrieves a resource or list of resources
+- `PUT` Creates or updates a resource
+
+##Typical Server Responses
+
+- `200 OK` The request was successful.
+- `403 Forbidden` The Request was leagal , but Missing parameters
+- `404 Not Found` Resource was not Found.
+- `415 Unsupported Media Type` The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+
+# Group Homecare Customer Systems API For Staging DB
+
+## /homecare/contracts/v1/id/{id}
+
+Get the Contracts Details based on the unquie id
+
++ Parameters
+    + id (required, string, `OD123`) ... Alphanumeric `id` of the Lead to perform action with.
+
+### GET
+The following table lists some possible outcomes that may occur as a result of this call:
+
+| Http Status Code |              Description             | Scenario | Resolution |
+|:----------------:|:------------------------------------:|:--------:|:----------:|
+|              200 | Contract returned                        |          |            |
+|              403 | The Request was leagal | Processing error | Refer to error message in response |
+|              404 | Contract not found
+|              415 |  Unsupported Media Type| Processing error | Refer to error message in response |
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "contract": "TEST",
+              "contractaccount": "TEST",
+              "partner": "TESTPARTNER",
+              "title": "MR",
+              "firstname": "TESTFIRSTNAME",
+              "lastname": "TESTLASTNAME",
+              "email": "test@gmail.com",
+              "phonenumber": "1234",
+              "mobilenumber": "1234",
+              "housenumber": "1",
+              "street": "22",
+              "postcode": "SL11QJ",
+              "city": "SLOUGH",
+              "country": "ENGLAND",
+              "status": "OK",
+              "contractdate": "2016-10-10",
+              "phoneconsent": null,
+              "emailconsent": null
+            }
+
+
++ Response 403 (application/json)
+    Returned if there was an exception while processing the request.
+    + Body
+    
+            { "message": "Forbidden"}
+
++ Response 404 (application/json)
+    Returned if there are no contracts for the externalid
+    + Body
+    
+            {
+              "status": 404,
+              "errors": {
+                "description": "contract not found"
+                }
+            }
++ Response 415 (application/json)
+    Returned if there was an exception while processing the request.
+    + Body
+            
+            {
+                "message": "Unsupported Media Type"
+            }
+
+## /homecare/contracts/
+
+### PUT
+The following table lists some possible outcomes that may occur as a result of this call:
+
+| Http Status Code |              Description             | Scenario | Resolution |
+|:----------------:|:------------------------------------:|:--------:|:----------:|
+|              200 | Contract Created                   |          |            |
+|              403 | The Request was leagal | Processing error | Refer to error message in response |
+|              404 | Exception happened during the request | Processing error |Refer to error message in response
+|              415 | Unsupported Media Type| Processing error | Refer to error message in response |
+
++ Request (application/json)
+    + Body    
+
+            {
+               "contractaccount": "TEST",
+               "contract": "test2",
+               "city": "slough",
+               "country": "ENGLAND",
+               "contractdate": "2016-01-01",
+               "emailconsent": true,
+               "housenumber": "1",
+               "mobilenumber": "1234",
+               "firstname": "TESTFIRSTNAME",
+               "lastname": "TESTLASTNAME",
+               "partner": "TESTPARTNER",
+               "phoneconsent": true,
+               "phonenumber": "1234",
+               "postcode": "SL11QJ",
+               "street": "22",
+               "title": "MR",
+               "email":"test@gmail.er"
+            }  
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+               "contractaccount": "TEST",
+               "contract": "test2",
+               "city": "slough",
+               "country": "ENGLAND",
+               "contractdate": "2016-01-01",
+               "emailconsent": true,
+               "housenumber": "1",
+               "mobilenumber": "1234",
+               "firstname": "TESTFIRSTNAME",
+               "lastname": "TESTLASTNAME",
+               "partner": "TESTPARTNER",
+               "phoneconsent": true,
+               "phonenumber": "1234",
+               "postcode": "SL11QJ",
+               "street": "22",
+               "title": "MR",
+               "email":"test@gmail.er"
+            }  
+            
+    
+
++ Response 403 (application/json)
+    Returned if there was an exception while processing the request.
+    + Body
+    
+            { "message": "Forbidden"}
+
++ Response 404 (application/json)
+    Returned if there was an expection while processing the request body
+    + Body
+    
+            {
+                "message": "Exception",
+                "errorMessage": "Provided {TEXT} is not valid"
+            }
+
++ Response 415 (application/json)
+    Returned if there was an exception while processing the request.
+    + Body
+            
+            {
+                "message": "Unsupported Media Type"
+            }        
+
+# Group HomeCare WebShop Customer 
+
+
+## /homecare/contracts/?email={email}&mobileno={mobileno}
+
+Get the Contracts Details based on the unquie id
+
++ Parameters
+     + email (optional , string ,`test@ymail.com`) ...  Passing the emailId.
+     + mobileno (optional ,string , `test@ymail.com`) .. Passing the mobile number 
+  
+### GET
+The following table lists some possible outcomes that may occur as a result of this call:
+
+| Http Status Code |              Description             | Scenario | Resolution |
+|:----------------:|:------------------------------------:|:--------:|:----------:|
+|              200 | Contract returned                        |          |            |
+|              403 | The Request was leagal | Processing error | Refer to error message in response |
+|              404 | Contract not found
+|              415 |  Unsupported Media Type| Processing error | Refer to error message in response |
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "contract": "TEST",
+              "contractaccount": "TEST",
+              "partner": "TESTPARTNER",
+              "title": "MR",
+              "firstname": "TESTFIRSTNAME",
+              "lastname": "TESTLASTNAME",
+              "email": "test@gmail.com",
+              "phonenumber": "1234",
+              "mobilenumber": "1234",
+              "housenumber": "1",
+              "street": "22",
+              "postcode": "SL11QJ",
+              "city": "SLOUGH",
+              "country": "ENGLAND",
+              "status": "OK",
+              "contractdate": "2016-10-10",
+              "phoneconsent": null,
+              "emailconsent": null
+            }
+
+
++ Response 403 (application/json)
+    Returned if there was an exception while processing the request.
+    + Body
+    
+            { "message": "Forbidden"}
+
++ Response 404 (application/json)
+    Returned if there are no contracts for the externalid
+    + Body
+    
+            {
+              "status": 404,
+              "errors": {
+                "description": "contract not found"
+                }
+            }
++ Response 415 (application/json)
+    Returned if there was an exception while processing the request.
+    + Body
+            
+            {
+                "message": "Unsupported Media Type"
+            }
