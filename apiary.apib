@@ -182,43 +182,66 @@ The following table lists some possible outcomes that may occur as a result of t
     
      + Body
 
-            {
-                "orders":[
-                     {
-                        "first_name":"testfirstname",
-                        "last_name":"testlastname",
-                        "address1":"22",
-                        "address2":"chatham court",
-                        "city":"slough",
-                        "state":"berk",
-                        "postal_code":"sl11qj",
-                        "country":"uk",
-                        "email":"test@gmail.com",
-                        "phone":"124345",
-                        "is_commercial":true,
-                        "is_pobox":false,
-                        "order_number":"235323",
-                        "order_date":"12-10-1986",
-                        "sku":"testsku",
-                        "quantity":13,
-                        "commerce_name":"testcommerce",
-                        "external_id":"externl1",
-                        "warehouse_id":"testwarehouse",
-                        "service_level_code":"testcode",
-                        "company":"testcompany"
+             {
+                    "orders": [
+                    {
+                      "first_name": "TestfirstName1",
+                      "last_name": "TestLastName1",
+                      "address1": "22",
+                      "address2": "london bridge",
+                      "city": "london",
+                      "state": "berk",
+                      "country": "UK",
+                      "postal_code": "23423",
+                      "email": "abc@gmail.com",
+                      "phone": "123123",
+                      "is_commercial": true,
+                      "is_pobox": false,
+                      "sw_order_number": "ORD123",
+                      "order_date": "12-10-2016",
+                      "sku": "T23424",
+                      "quantity": 12,
+                      "commerce_name": "testcommercename1",
+                      "external_id": "ext123",
+                      "warehouse_id": "W123",
+                      "service_level_code": 12344,
+                      "company": "testcompany1"
+                    },
+                    {
+                      "first_name": "TestfirstName2",
+                      "last_name": "TestLastName2",
+                      "address1": "23",
+                      "address2": "bridge",
+                      "city": "london",
+                      "state": "berkshire",
+                      "country": "UK",
+                      "postal_code": "324234",
+                      "email": "abc1@gmail.com",
+                      "phone": "43434",
+                      "is_commercial": false,
+                      "is_pobox": true,
+                      "sw_order_number": "ORD321",
+                      "order_date": "10-10-2016",
+                      "sku": "T234",
+                      "quantity": 10,
+                      "commerce_name": "testcommercename2",
+                      "external_id": "ext321",
+                      "warehouse_id": "W321",
+                      "service_level_code": 23435,
+                      "company": "testcompany2"
                     }
-                    ]
-            }  
+                ]
+            }
             
 
 + Response 400 (application/json)
     Returned if there was an expection while processing the request body
     + Body
-    
+            
             {
                 "message": "Exception",
-                "errorMessage": "Provided {TEXT} is not valid"
-            }        
+                "errorMessage": "invalid input syntax for integer: \"E12344\""
+               }     
 
 + Response 403 (application/json)
     Returned if there was an exception while processing the request.
