@@ -1,15 +1,16 @@
 FORMAT: 1A
 HOST: https://cs-api.bgchtest.info
 
-# Customer Systems API
+# NACHo
 
-A simple API offered by ConnectedHomes Customer Systems
+A simple API offered by ConnectedHomes Customer Systems for NACHo
 
 
 ##Allowed HTTPs requests
 
 - `GET` Retrieves a resource or list of resources
-- `PUT` Creates or updates a resource
+- `POST` Creates a resource
+
 
 ##Typical Server Responses
 
@@ -18,23 +19,24 @@ A simple API offered by ConnectedHomes Customer Systems
 - `404 Not Found` Resource was not Found.
 - `415 Unsupported Media Type` The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
 
-# Group Homecare Customer Systems API For Staging DB
 
-## /homecare/contracts/id/{id}
+# Group NACHo Customer Systems API For Staging DB
 
-Get the Contracts Details based on the contract id
+## /nacho/order/{id}
+
+Get the order Details based on the order id
 
 + Parameters
-    + id (required, string, `OD123`) ... Alphanumeric `id` of the Contract
+    + id (required, string, `OD123`) ... Alphanumeric `id` of the Order
 
 ### GET
 The following table lists some possible outcomes that may occur as a result of this call:
 
 | Http Status Code |              Description             | Scenario | Resolution |
 |:----------------:|:------------------------------------:|:--------:|:----------:|
-|              200 | Contract returned                        |          |            |
+|              200 | Order returned                        |          |            |
 |              403 | The Request was legal | Processing error | Refer to error message in response |
-|              404 | Contract not found
+|              404 | Order not found
 |              415 | Unsupported Media Type| Processing error | Refer to error message in response |
 
 
@@ -47,34 +49,55 @@ The following table lists some possible outcomes that may occur as a result of t
             X-api-Key : ********
             X-Amz-Date :20160719T101907Z
             Host :cs-api.bgchtest.info
-
+    
 + Response 200 (application/json)
 
 
     + Body
-
+            
+            
             {
-              "contract": "TEST",
-              "contractaccount": "TEST",
-              "partner": "TESTPARTNER",
-              "title": "MR",
-              "firstname": "TESTFIRSTNAME",
-              "lastname": "TESTLASTNAME",
-              "email": "test@gmail.com",
-              "phonenumber": "1234",
-              "mobilenumber": "1234",
-              "housenumber": "1",
-              "street": "22",
-              "postcode": "SL11QJ",
-              "city": "SLOUGH",
-              "country": "ENGLAND",
-              "status": "OK",
-              "contractdate": "2016-10-26",
-              "phoneconsent": null,
-              "emailconsent": null
+                  "first_name": "testfirstname",
+                  "last_name": null,
+                  "address1": null,
+                  "address2": null,
+                  "city": null,
+                  "state": null,
+                  "postal_code": null,
+                  "country": null,
+                  "email": null,
+                  "phone": null,
+                  "is_commercial": null,
+                  "is_pobox": null,
+                  "order_number": "order1",
+                  "order_date": null,
+                  "sku": null,
+                  "quantity": null,
+                  "commerce_name": null,
+                  "external_id": null,
+                  "warehouse_id": null,
+                  "service_level_code": null,
+                  "company": null,
+                  "tracking": null,
+                  "carrier": null,
+                  "url": null,
+                  "summary": null,
+                  "summary_date": null,
+                  "created_date": null,
+                  "processed_date": null,
+                  "deliverd_date": null,
+                  "submitted_date": null,
+                  "completed_date": null,
+                  "expected_date": null,
+                  "locale": null,
+                  "language_preference": null,
+                  "status": null,
+                  "mobile": null,
+                  "title": null
             }
-
-
+            
+            
+    
 + Response 403 (application/json)
     Returned if there was an exception while processing the request.
     + Body
@@ -82,7 +105,7 @@ The following table lists some possible outcomes that may occur as a result of t
             { "message": "Forbidden"}
 
 + Response 404 (application/json)
-    Returned if there are no contracts for the externalid
+    Returned if there are no order for the externalid
     + Body
     
             {
@@ -98,17 +121,19 @@ The following table lists some possible outcomes that may occur as a result of t
             {
                 "message": "Unsupported Media Type"
             }
+            
+            
+    
+## /nacho/order/
 
-## /homecare/contracts/
+Post the Orders into Staging DB
 
-Post the Contracts into Staging DB
-
-### PUT
+### POST
 The following table lists some possible outcomes that may occur as a result of this call:
 
 | Http Status Code |              Description             | Scenario | Resolution |
 |:----------------:|:------------------------------------:|:--------:|:----------:|
-|              200 | Contract Created                   |          |            |
+|              200 | Order Created                   |          |            |
 |              400 | Bad Request | Processing error | Refer to error message in response |
 |              403 | The Request was legal | Processing error | Refer to error message in response |
 |              415 | Unsupported Media Type| Processing error | Refer to error message in response |
@@ -123,50 +148,66 @@ The following table lists some possible outcomes that may occur as a result of t
             Host :cs-api.bgchtest.info
            
         
-    + Body    
-
+    + Body            
+        
             {
-               "contractaccount": "TEST",
-               "contract": "test2",
-               "city": "slough",
-               "country": "ENGLAND",
-               "contractdate": "2016-01-26",
-               "emailconsent": true,
-               "housenumber": "1",
-               "mobilenumber": "1234",
-               "firstname": "TESTFIRSTNAME",
-               "lastname": "TESTLASTNAME",
-               "partner": "TESTPARTNER",
-               "phoneconsent": true,
-               "phonenumber": "1234",
-               "postcode": "SL11QJ",
-               "street": "22",
-               "title": "MR",
-               "email":"test@gmail.er"
-            }  
-
+                "orders":[
+                     {
+                        "first_name":"testfirstname",
+                        "last_name":"testlastname",
+                        "address1":"22",
+                        "address2":"chatham court",
+                        "city":"slough",
+                        "state":"berk",
+                        "postal_code":"sl11qj",
+                        "country":"uk",
+                        "email":"test@gmail.com",
+                        "phone":"124345",
+                        "is_commercial":true,
+                        "is_pobox":false,
+                        "order_number":"235323",
+                        "order_date":"12-10-1986",
+                        "sku":"testsku",
+                        "quantity":13,
+                        "commerce_name":"testcommerce",
+                        "external_id":"externl1",
+                        "warehouse_id":"testwarehouse",
+                        "service_level_code":"testcode",
+                        "company":"testcompany"
+                    }
+                    ]
+            }
+    
 + Response 200 (application/json)
     
-    + Body
+     + Body
 
             {
-               "contractaccount": "TEST",
-               "contract": "test2",
-               "city": "slough",
-               "country": "ENGLAND",
-               "contractdate": "2016-01-26",
-               "emailconsent": true,
-               "housenumber": "1",
-               "mobilenumber": "1234",
-               "firstname": "TESTFIRSTNAME",
-               "lastname": "TESTLASTNAME",
-               "partner": "TESTPARTNER",
-               "phoneconsent": true,
-               "phonenumber": "1234",
-               "postcode": "SL11QJ",
-               "street": "22",
-               "title": "MR",
-               "email":"test@gmail.er"
+                "orders":[
+                     {
+                        "first_name":"testfirstname",
+                        "last_name":"testlastname",
+                        "address1":"22",
+                        "address2":"chatham court",
+                        "city":"slough",
+                        "state":"berk",
+                        "postal_code":"sl11qj",
+                        "country":"uk",
+                        "email":"test@gmail.com",
+                        "phone":"124345",
+                        "is_commercial":true,
+                        "is_pobox":false,
+                        "order_number":"235323",
+                        "order_date":"12-10-1986",
+                        "sku":"testsku",
+                        "quantity":13,
+                        "commerce_name":"testcommerce",
+                        "external_id":"externl1",
+                        "warehouse_id":"testwarehouse",
+                        "service_level_code":"testcode",
+                        "company":"testcompany"
+                    }
+                    ]
             }  
             
 
@@ -186,90 +227,6 @@ The following table lists some possible outcomes that may occur as a result of t
             { "message": "Forbidden"}
 
 
-+ Response 415 (application/json)
-    Returned if there was an exception while processing the request.
-    + Body
-            
-            {
-                "message": "Unsupported Media Type"
-            }        
-
-# Group HomeCare WebShop Customer 
-
-
-## /homecare/contracts/?email={email}&mobileno={mobileno}
-
-Get the Contracts Details based on email and mobile number
-
-+ Parameters
-     + email (optional , string ,`test@ymail.com`) ...  Passing the emailId.
-     + mobileno (optional ,string , `123456789`) .. Passing the mobile number 
-  
-### GET
-The following table lists some possible outcomes that may occur as a result of this call:
-
-| Http Status Code |              Description             | Scenario | Resolution |
-|:----------------:|:------------------------------------:|:--------:|:----------:|
-|              200 | Contract returned                        |          |            |
-|              403 | The Request was legal | Processing error | Refer to error message in response |
-|              404 | Contract not found
-|              415 | Unsupported Media Type| Processing error | Refer to error message in response |
-
-
-
-+ Request 
-
-   
-    + Headers
-       
-            Authorization:AWS4-HMAC-SHA256 (AWS Signature)
-            X-api-Key : ********
-            X-Amz-Date :20160719T101907Z
-            Host :cs-api.bgchtest.info
-
-+ Response 200 (application/json)
-
-
-    + Body
-
-            {
-              "contract": "TEST",
-              "contractaccount": "TEST",
-              "partner": "TESTPARTNER",
-              "title": "MR",
-              "firstname": "TESTFIRSTNAME",
-              "lastname": "TESTLASTNAME",
-              "email": "test@gmail.com",
-              "phonenumber": "1234",
-              "mobilenumber": "1234",
-              "housenumber": "1",
-              "street": "22",
-              "postcode": "SL11QJ",
-              "city": "SLOUGH",
-              "country": "ENGLAND",
-              "status": "OK",
-              "contractdate": "2016-10-26",
-              "phoneconsent": null,
-              "emailconsent": null
-            }
-
-
-+ Response 403 (application/json)
-    Returned if there was an exception while processing the request.
-    + Body
-    
-            { "message": "Forbidden"}
-
-+ Response 404 (application/json)
-    Returned if there are no contracts for the externalid
-    + Body
-    
-            {
-              "status": 404,
-              "errors": {
-                "description": "contract not found"
-                }
-            }
 + Response 415 (application/json)
     Returned if there was an exception while processing the request.
     + Body
