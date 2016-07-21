@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://cs-api.bgchtest.info
+HOST: https://cs-api.bgchtest.info/api1
 
 # NACHo
 
@@ -27,7 +27,7 @@ A simple API offered by ConnectedHomes Customer Systems for NACHo
 Get the order Details based on the order id
 
 + Parameters
-    + id (required, string, `OD123`) ... Alphanumeric `id` of the Order
+    + id (required, string, `21`) ... Alphanumeric `id` of the Order
 
 ### GET
 The following table lists some possible outcomes that may occur as a result of this call:
@@ -57,45 +57,45 @@ The following table lists some possible outcomes that may occur as a result of t
             
             
             {
-                  "first_name": "testfirstname",
-                  "last_name": null,
-                  "address1": null,
-                  "address2": null,
-                  "city": null,
-                  "state": null,
-                  "postal_code": null,
-                  "country": null,
-                  "email": null,
-                  "phone": null,
-                  "is_commercial": null,
-                  "is_pobox": null,
-                  "order_number": "order1",
-                  "order_date": null,
-                  "sku": null,
-                  "quantity": null,
-                  "commerce_name": null,
-                  "external_id": null,
-                  "warehouse_id": null,
-                  "service_level_code": null,
-                  "company": null,
-                  "tracking": null,
-                  "carrier": null,
-                  "url": null,
-                  "summary": null,
-                  "summary_date": null,
-                  "created_date": null,
-                  "processed_date": null,
-                  "deliverd_date": null,
-                  "submitted_date": null,
-                  "completed_date": null,
-                  "expected_date": null,
-                  "locale": null,
-                  "language_preference": null,
-                  "status": null,
-                  "mobile": null,
-                  "title": null
+              "first_name": "TestFirstName",
+              "last_name": "TestLastName1",
+              "address1": "22",
+              "address2": "london bridge",
+              "city": "london",
+              "state": "berk",
+              "postal_code": "23423",
+              "country": "UK",
+              "email": "abc@gmail.com",
+              "phone": "123123",
+              "is_commercial": true,
+              "is_pobox": false,
+              "order_number": "21",
+              "order_date": "12-10-2016",
+              "sku": "T23424",
+              "quantity": 12,
+              "commerce_name": "testcommercename1",
+              "external_id": "ext123",
+              "warehouse_id": "W123",
+              "service_level_code": 12344,
+              "sw_order_number": "ORD123",
+              "company": "testcompany1",
+              "tracking": null,
+              "carrier": null,
+              "url": null,
+              "summary": null,
+              "summary_date": null,
+              "created_date": null,
+              "processed_date": null,
+              "deliverd_date": null,
+              "submitted_date": null,
+              "completed_date": null,
+              "expected_date": null,
+              "locale": null,
+              "language_preference": null,
+              "status": null,
+              "mobile": null,
+              "title": null
             }
-            
             
     
 + Response 403 (application/json)
